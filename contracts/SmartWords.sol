@@ -70,17 +70,8 @@ contract SmartWords is ERC721URIStorage, ERC721Enumerable {
         return newTextId;
     }
 
-    function getTextInfo(uint256 textId)
-        public
-        view
-        returns (
-            string memory,
-            bytes32,
-            uint256
-        )
-    {
-        Text memory t = _texts[textId];
-        return (t.title, t.textHash, t.textTimestamp);
+    function getTextInfo(uint256 textId) public view returns (Text memory) {
+        return _texts[textId];
     }
 
     function getTextHashOf(uint256 textId) public view returns (bytes32) {
@@ -98,13 +89,7 @@ contract SmartWords is ERC721URIStorage, ERC721Enumerable {
         return (t.textTimestamp);
     }
 
-    function isCopyright(bytes32 textHash_) public view returns (bool) {
-        bool isCr;
-        if (_isHashes[textHash_] == address(0)) {
-            isCr = false;
-        } else {
-            isCr = true;
-        }
-        return isCr;
+    function textHashOf(bytes32 textHash_) public view returns (address) {
+        return _isHashes[textHash_];
     }
 }
